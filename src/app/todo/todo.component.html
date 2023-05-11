@@ -1,0 +1,27 @@
+<div class="filter">
+    <input type="text" placeholder="Filter todo by title..." [(ngModel)]="searchString">
+</div>
+<div class="role">
+    <div class="role_name">Role</div>
+    <select class="select" #select (change)="selectChangeHandler($event)">
+        <option selected="selected" value="Role">Role</option>
+        <option value="Designer">Designer</option>
+        <option value="Prog"> Prog</option>
+        <option value="Build">Build</option>
+        <option value="Artist">Artist</option>
+      </select>
+</div>
+<ul *ngIf="todoService.todo.length; else noTodo">
+    <li *ngFor="let el of todoService.todo  | todoFilter: searchString: role">
+        <span [class.done]="el.complited">
+                <input type="checkbox" [checked]="el.complited" (change)="onChange(el.id)">
+                {{el.title}}
+            </span>
+        <span class="role">{{el.role}}</span>
+        <small>{{el.date | date:"EEEEEE dd LLL"}}</small>
+        <button class="rm" (click)="removeTodo(el.id)">&times;</button>
+    </li>
+</ul>
+<ng-template #noTodo>
+    <p>No todo now</p>
+</ng-template>

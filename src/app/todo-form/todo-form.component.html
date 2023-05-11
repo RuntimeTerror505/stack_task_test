@@ -1,0 +1,23 @@
+<div>
+    <input 
+    type="text" 
+    placeholder="Add todo....."
+    [(ngModel)]="title"
+    (keydown.enter)="addTodo()"
+    >
+    <select class="select" #select (change)="selectChangeHandler($event)">
+      <option value="Designer" default="Designer" selected="selected">
+        Designer
+      </option>
+      <option  value="Prog">
+        Prog
+      </option>
+      <option value="Build">
+        Build
+      </option>
+      <option value="Artist">
+        Artist
+      </option>
+    </select>
+    <button (click)="addTodo()">Add</button>
+</div>
